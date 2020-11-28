@@ -22,17 +22,14 @@ class InquiryController implements Controller {
         const inquiryObject = new this.inquiry({
             ...inquiryData
         });
-        const saveInquiry = await inquiryObject.save()
-        .then(result => {
-            console.log(`${result.get('name')} just sent an inquiry! 📝`);
-            response.status(200).json({ success: true, result });
-            // response.send(result)
-        })
-        .catch(err => {
-            console.error(err);
-            response.status(500).json({ success: false, error: err });
-            // response.send(err)
-        })
+        try {
+            const saveInquiry = await inquiryObject.save();
+            console.log(`${saveInquiry.get('name')} just sent an inquiry! 📝`);
+            response.status(200).json({ success: true, result: `Inquiry with UUID ${saveInquiry._id} saved successfully` });
+        } catch (error) {
+            console.error(error);
+            response.status(500).json({ success: false, error });
+        }
 
     }
 
