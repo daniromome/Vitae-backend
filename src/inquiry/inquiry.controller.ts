@@ -25,10 +25,10 @@ class InquiryController implements Controller {
         try {
             const saveInquiry = await inquiryObject.save();
             console.log(`${saveInquiry.get('name')} just sent an inquiry! 📝`);
-            response.status(200).json({ success: true, result: `Inquiry with UUID ${saveInquiry._id} saved successfully` });
+            return response.status(200).json({ success: true, result: `Inquiry with UUID ${saveInquiry._id} successfully saved` });
         } catch (error) {
             console.error(error);
-            response.status(500).json({ success: false, error });
+            return response.status(500).json({ success: false, error });
         }
 
     }
