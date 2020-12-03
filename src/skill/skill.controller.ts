@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import Controller from "../interfaces/controller.interface";
-import { SkillDTO, ModifySkillDTO } from "./skil.dto";
+import { SkillDTO, ModifySkillDTO } from "./skill.dto";
 import SkillModel from "./skill.model";
 
 class SkillController implements Controller {
@@ -35,7 +35,7 @@ class SkillController implements Controller {
 
     private getSkills = async (request: Request, response: Response) => {
         try {
-            const skills = await this.skill.find();
+            const skills = await this.skill.find().sort({ expertise: 'desc' }).exec();
             console.log(`Fetched ${skills.length === 1 ? 'a' : skills.length} skill${skills.length > 1 ? 's' : ''} from the database`);
             return response.status(200).json({ success: true, result: skills });
         } catch (error) {
@@ -47,7 +47,7 @@ class SkillController implements Controller {
     private modifySkill = async (request: Request, response: Response) => {
         const skillData: ModifySkillDTO = request.body;
         try {
-            const skill = await this.skill.findByIdAndUpdate(skillData._id, skillData);
+            const skill = await this.skill.findByIdAndUpdate(skillData._id, skillData, { new: true} ).exec();
             console.log(`Skill ${skill.get('language')} has been successfully modified`);
             return response.status(200).json({ success: true, result: skill });
         } catch (error) {
