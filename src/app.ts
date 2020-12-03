@@ -36,7 +36,7 @@ class App {
             MONGO_PASSWORD,
             MONGO_URI
         } = process.env;
-        mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_URI}`, { useNewUrlParser: true, useUnifiedTopology: true })
+        mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_URI}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
         .then(() => console.log("Database connection has been stablished"))
         .catch(err => console.error(err));
     }
