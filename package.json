@@ -1,11 +1,12 @@
 {
   "name": "@dani9oo/vitae",
   "version": "1.0.0",
-  "description": "Backend con Typescript para proyecto personal",
+  "description": "Backend con Typescript para Vitae",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
-    "start": "ts-node ./src/server.ts"
+    "start": "ts-node ./src/server.ts",
+    "build": "tsc"
   },
   "author": "dani9oo",
   "license": "MPL-2.0",
