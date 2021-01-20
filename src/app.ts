@@ -1,7 +1,7 @@
-import * as bodyparser from "body-parser";
-import * as cors from "cors";
-import * as express from "express";
-import * as mongoose from "mongoose";
+import bodyparser from "body-parser";
+import cors from "cors";
+import express from "express";
+import mongoose from "mongoose";
 import Controller from "./interfaces/controller.interface";
 
 class App {
@@ -15,7 +15,7 @@ class App {
     }
 
     public listen() {
-        this.app.listen(Number(process.env.PORT), process.env.LISTEN_INTERFACE, () => {
+        this.app.listen(Number(process.env.PORT), process.env.LISTEN_INTERFACE!, () => {
             console.log(`App listening on port ${process.env.PORT}`);
         });
     }
