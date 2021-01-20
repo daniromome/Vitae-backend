@@ -48,7 +48,7 @@ class SkillController implements Controller {
         const skillData: ModifySkillDTO = request.body;
         try {
             const skill = await this.skill.findByIdAndUpdate(skillData._id, skillData, { new: true} ).exec();
-            console.log(`Skill ${skill.get('language')} has been successfully modified`);
+            console.log(`Skill ${skill?.get('language')} has been successfully modified`);
             return response.status(200).json({ success: true, result: skill });
         } catch (error) {
             console.error(error);

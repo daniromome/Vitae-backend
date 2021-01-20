@@ -48,7 +48,7 @@ class ProjectController implements Controller {
         const projectData: ModifyProjectDTO = request.body;
         try {
             const project = await this.project.findByIdAndUpdate(projectData._id, projectData, { new: true} ).exec();
-            console.log(`Project ${project.get('title')} has been successfully modified`);
+            console.log(`Project ${project?.get('title')} has been successfully modified`);
             return response.status(200).json({ success: true, result: project });
         } catch (error) {
             console.error(error);
