@@ -32,15 +32,18 @@ class App {
         }));
     }
 
-    private initDatabase() {
+    private async initDatabase() {
         const {
             MONGO_USER,
             MONGO_PASSWORD,
             MONGO_URI
         } = process.env;
-        mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_URI}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-        .then(() => console.log("Database connection has been stablished"))
-        .catch(err => console.error(err));
+        try {
+            await mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_URI}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+            console.log("Database connection has been stablished");
+        } catch (error) {
+            console.error(error);
+        }
     }
     private initControllers(controllers: Controller[]) {
         controllers.forEach((controller) => {
