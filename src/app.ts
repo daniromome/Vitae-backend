@@ -27,9 +27,7 @@ class App {
     private initMiddleware() {
         this.app.use(bodyparser.json());
         this.app.use(express.urlencoded({ extended: true }));
-        this.app.use(cors({
-            origin: ['https://dani9oo.dev']
-        }));
+        this.app.use(cors());
     }
 
     private async initDatabase() {
