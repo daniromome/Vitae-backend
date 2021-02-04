@@ -2,6 +2,9 @@ import { Request, Response, Router } from "express";
 import Controller from "../interfaces/controller.interface";
 import inquiryModel from "./inquiry.model";
 import inquiryDTO from "./inquiry.dto";
+import { validate } from "class-validator";
+import { plainToClass } from "class-transformer";
+import { throwValidationErrors } from '../common/vitae.utils';
 
 class InquiryController implements Controller {
 
@@ -18,7 +21,9 @@ class InquiryController implements Controller {
     }
 
     private submitInquiry = async (request: Request, response: Response) => {
-        const inquiryData: inquiryDTO = request.body;
+        const inquiryData = plainToClass(inquiryDTO, request.body);
+        const errors = await validate(inquiryData, { validationError: { target: false }});
+        if (errors.length > 0) return response.status(400).json(throwValidationErrors(errors));
         const inquiryObject = new this.inquiry({
             ...inquiryData
         });
