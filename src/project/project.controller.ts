@@ -2,6 +2,9 @@ import { Request, Response, Router } from "express";
 import Controller from "../interfaces/controller.interface";
 import { ProjectDTO, ModifyProjectDTO } from "./project.dto";
 import ProjectModel from "./project.model";
+import { plainToClass } from 'class-transformer';
+import { validate } from 'class-validator';
+import { throwValidationErrors } from '../common/vitae.utils';
 
 class ProjectController implements Controller {
     public path = '/project';
@@ -19,7 +22,9 @@ class ProjectController implements Controller {
     }
 
     private createProject = async (request: Request, response: Response) => {
-        const projectData: ProjectDTO = request.body;
+        const projectData = plainToClass(ProjectDTO, request.body);
+        const errors = await validate(projectData, { validationError: { target: false }});
+        if (errors.length > 0) return response.status(400).json(throwValidationErrors(errors));
         const projectObject = new this.project({
             ...projectData
         });
@@ -45,7 +50,9 @@ class ProjectController implements Controller {
     }
 
     private modifyProject = async (request: Request, response: Response) => {
-        const projectData: ModifyProjectDTO = request.body;
+        const projectData = plainToClass(ModifyProjectDTO, request.body);
+        const errors = await validate(projectData, { validationError: { target: false }});
+        if (errors.length > 0) return response.status(400).json(throwValidationErrors(errors));
         try {
             const project = await this.project.findByIdAndUpdate(projectData._id, projectData, { new: true} ).exec();
             console.log(`Project ${project?.get('title')} has been successfully modified`);
