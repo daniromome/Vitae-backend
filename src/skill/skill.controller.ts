@@ -2,6 +2,9 @@ import { Request, Response, Router } from "express";
 import Controller from "../interfaces/controller.interface";
 import { SkillDTO, ModifySkillDTO } from "./skill.dto";
 import SkillModel from "./skill.model";
+import { plainToClass } from 'class-transformer';
+import { throwValidationErrors } from '../common/vitae.utils';
+import { validate } from 'class-validator';
 
 class SkillController implements Controller {
     public path = '/skill';
@@ -19,7 +22,9 @@ class SkillController implements Controller {
     }
 
     private createSkill = async (request: Request, response: Response) => {
-        const skillData: SkillDTO = request.body;
+        const skillData = plainToClass(SkillDTO, request.body);
+        const errors = await validate(skillData, { validationError: { target: false }});
+        if (errors.length > 0) return response.status(400).json(throwValidationErrors(errors));
         const skillObject = new this.skill({
             ...skillData
         });
@@ -45,7 +50,9 @@ class SkillController implements Controller {
     }
 
     private modifySkill = async (request: Request, response: Response) => {
-        const skillData: ModifySkillDTO = request.body;
+        const skillData = plainToClass(ModifySkillDTO, request.body);
+        const errors = await validate(skillData, { validationError: { target: false }});
+        if (errors.length > 0) return response.status(400).json(throwValidationErrors(errors));
         try {
             const skill = await this.skill.findByIdAndUpdate(skillData._id, skillData, { new: true} ).exec();
             console.log(`Skill ${skill?.get('language')} has been successfully modified`);
