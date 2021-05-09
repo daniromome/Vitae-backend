@@ -13,4 +13,4 @@ const app = new App([
     new ProjectController
 ]);
 
-module.exports.handler = serverless(app.getServer());
+export const handler = serverless(app.getServer());
