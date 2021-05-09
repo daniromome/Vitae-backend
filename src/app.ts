@@ -1,9 +1,8 @@
-import bodyparser from "body-parser";
+import { json } from "body-parser";
 import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 import Controller from "./interfaces/controller.interface";
-
 class App {
     public app: express.Application;
 
@@ -25,9 +24,11 @@ class App {
     }
 
     private initMiddleware() {
-        this.app.use(bodyparser.json());
+        this.app.use(json());
         this.app.use(express.urlencoded({ extended: true }));
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: 'https://www.dani9oo.dev'
+        }));
     }
 
     private async initDatabase() {
