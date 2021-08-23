@@ -1,10 +1,9 @@
-import { IsDivisibleBy, IsMongoId, IsNumber, IsString, Max, Min, IsOptional } from 'class-validator';
-
+import { IsDivisibleBy, IsMongoId, IsNumber, IsString, Max, Min, IsOptional } from 'class-validator'
 
 class SkillDTO {
     @IsString()
     public language: string;
-    
+
     @IsNumber()
     @IsDivisibleBy(0.5)
     @Min(0)
@@ -22,7 +21,7 @@ class ModifySkillDTO {
     @IsString()
     @IsOptional()
     public language: string;
-    
+
     @IsNumber()
     @IsDivisibleBy(0.5)
     @Min(0)
@@ -36,6 +35,6 @@ class ModifySkillDTO {
 }
 
 export {
-    SkillDTO,
-    ModifySkillDTO
-};
+  SkillDTO,
+  ModifySkillDTO
+}

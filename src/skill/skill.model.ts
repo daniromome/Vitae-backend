@@ -1,11 +1,11 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose'
 
 const skillSchema = new Schema({
-    language: String, 
-    expertise: Number,
-    icon: String
-});
+  language: String,
+  expertise: Number,
+  icon: String
+})
 
-const SkillModel = model('skill', skillSchema);
+const SkillModel = model('skill', skillSchema)
 
-export default SkillModel;
+export default SkillModel

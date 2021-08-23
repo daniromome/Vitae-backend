@@ -1,11 +1,11 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose'
 
 const inquirySchema = new Schema({
-    name: String,
-    email: String,
-    inquiry: String
-});
+  name: String,
+  email: String,
+  inquiry: String
+})
 
-const inquiryModel = model('inquiry', inquirySchema);
+const InquiryModel = model('inquiry', inquirySchema)
 
-export default inquiryModel;
+export default InquiryModel

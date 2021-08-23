@@ -1,6 +1,6 @@
-import { IsString, IsEmail } from "class-validator";
+import { IsString, IsEmail } from 'class-validator'
 
-class InquiryDTO {
+export class InquiryDTO {
     @IsString()
     public name: string;
 
@@ -10,5 +10,3 @@ class InquiryDTO {
     @IsString()
     public inquiry: string;
 }
-
-export default InquiryDTO;
