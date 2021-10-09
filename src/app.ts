@@ -31,22 +31,13 @@ class App {
       this.app.use(json())
       this.app.use(express.urlencoded({ extended: true }))
       this.app.use(cors({
-        origin: process.env.NODE_ENV === 'production' ? 'https://www.dani9oo.dev' : ['http://localhost:3000', 'http://localhost:4200']
+        origin: process.env.NODE_ENV === 'production' ? 'https://vitae.daniromo.me' : ['http://localhost:3000', 'http://localhost:4200']
       }))
     }
 
     private async initDatabase () {
-      const {
-        MONGO_USER,
-        MONGO_PASSWORD,
-        MONGO_URI
-      } = process.env
-      try {
-        await mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_URI}`)
-        console.log('Database connection has been stablished')
-      } catch (error) {
-        console.error(error)
-      }
+      if (!process.env.MONGO_URI) throw new Error('Mongodb database connection URI is required for this project to work')
+      await mongoose.connect(process.env.MONGO_URI).finally(() => console.log('Database connection has been stablished'))
     }
 
     private initRouters (routers: AppRouter[]) {
