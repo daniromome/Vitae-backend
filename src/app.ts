@@ -2,16 +2,19 @@ import { json } from 'body-parser'
 import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
-import { Controller } from './interfaces/controller.interface'
+import { AppRouter } from './common/interfaces/controller.interface'
 
 class App {
     public app: express.Application;
 
-    constructor (controllers: Controller[]) {
+    constructor (routers: AppRouter[]) {
       this.app = express()
-      this.initDatabase()
       this.initMiddleware()
-      this.initControllers(controllers)
+      this.initRouters(routers)
+    }
+
+    public init = async () => {
+      await this.initDatabase()
     }
 
     public listen () {
@@ -39,16 +42,16 @@ class App {
         MONGO_URI
       } = process.env
       try {
-        await mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_URI}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+        await mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_URI}`)
         console.log('Database connection has been stablished')
       } catch (error) {
         console.error(error)
       }
     }
 
-    private initControllers (controllers: Controller[]) {
-      controllers.forEach((controller) => {
-        this.app.use('/api', controller.router)
+    private initRouters (routers: AppRouter[]) {
+      routers.forEach((router) => {
+        this.app.use('/api', router.router)
       })
     }
 }

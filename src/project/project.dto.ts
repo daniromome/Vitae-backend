@@ -1,4 +1,4 @@
-import { IsMongoId, IsString, IsOptional, IsUrl, IsDate } from 'class-validator'
+import { IsString, IsUrl, IsDate } from 'class-validator'
 
 export class ProjectDTO {
     @IsString()
@@ -20,38 +20,5 @@ export class ProjectDTO {
     public repository: string;
 
     @IsDate()
-    public date: Date;
-}
-
-export class ModifyProjectDTO {
-    @IsMongoId()
-    public _id: string;
-
-    @IsString()
-    @IsOptional()
-    public image: string;
-
-    @IsString()
-    @IsOptional()
-    public title: string;
-
-    @IsUrl()
-    @IsOptional()
-    public url: string;
-
-    @IsString()
-    @IsOptional()
-    public summary: string;
-
-    @IsString()
-    @IsOptional()
-    public description: string;
-
-    @IsUrl()
-    @IsOptional()
-    public repository: string;
-
-    @IsDate()
-    @IsOptional()
     public date: Date;
 }

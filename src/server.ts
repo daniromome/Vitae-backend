@@ -1,16 +1,14 @@
-import { config } from 'dotenv'
 import App from './app'
-import InquiryController from './inquiry/inquiry.controller'
-import ProjectController from './project/project.controller'
-import SkillController from './skill/skill.controller'
-import serverless from 'serverless-http'
+import { SkillRouter } from './skill/skill.router'
+import { ProjectRouter } from './project/project.router'
+import { InquiryRouter } from './inquiry/inquiry.router'
 
-config()
-
-const app = new App([
-  new InquiryController(),
-  new SkillController(),
-  new ProjectController()
-])
-
-export const handler = serverless(app.getServer())
+(async () => {
+  const app = new App([
+    new SkillRouter(),
+    new ProjectRouter(),
+    new InquiryRouter()
+  ])
+  await app.init()
+  app.listen()
+})()

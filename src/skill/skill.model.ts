@@ -1,11 +1,14 @@
-import { Schema, model } from 'mongoose'
+import { getModelForClass, prop } from '@typegoose/typegoose'
 
-const skillSchema = new Schema({
-  language: String,
-  expertise: Number,
-  icon: String
-})
+class Skill {
+  @prop()
+  language: string
 
-const SkillModel = model('skill', skillSchema)
+  @prop()
+  expertise: number
 
-export default SkillModel
+  @prop()
+  icon: string
+}
+
+export const SkillModel = getModelForClass(Skill)

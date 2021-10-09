@@ -1,15 +1,26 @@
-import { Schema, model } from 'mongoose'
+import { getModelForClass, prop } from '@typegoose/typegoose'
 
-const projectSchema = new Schema({
-  image: String,
-  title: String,
-  url: String,
-  summary: String,
-  description: String,
-  repository: String,
+class Project {
+  @prop()
+  image: string
+
+  @prop()
+  title: string
+
+  @prop()
+  url: string
+
+  @prop()
+  summary: string
+
+  @prop()
+  description: string
+
+  @prop()
+  repository?: string
+
+  @prop()
   date: Date
-})
+}
 
-const ProjectModel = model('project', projectSchema)
-
-export default ProjectModel
+export const ProjectModel = getModelForClass(Project)

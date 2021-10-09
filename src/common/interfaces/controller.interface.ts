@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-export interface Controller {
+export interface AppRouter {
     path: string;
     router: Router;
 }

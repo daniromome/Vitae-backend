@@ -1,11 +1,14 @@
-import { Schema, model } from 'mongoose'
+import { getModelForClass, prop } from '@typegoose/typegoose'
 
-const inquirySchema = new Schema({
-  name: String,
-  email: String,
-  inquiry: String
-})
+class Inquiry {
+  @prop()
+  name: string
 
-const InquiryModel = model('inquiry', inquirySchema)
+  @prop()
+  email: string
 
-export default InquiryModel
+  @prop()
+  inquiry: string
+}
+
+export const InquiryModel = getModelForClass(Inquiry)
