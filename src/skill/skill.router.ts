@@ -5,6 +5,7 @@ import { validate } from 'class-validator'
 import { skillController } from './skill.controller'
 import { MongoDTO } from '../common/dtos/mongo.dto'
 import { handleValidationErrors, handleServerError } from '../common/vitae.utils'
+import cors from 'cors'
 
 export class SkillRouter {
   public path = '/skill';
@@ -16,9 +17,9 @@ export class SkillRouter {
   }
 
   private initRoutes () {
-    this.router.post(`${this.path}/create`, this.createSkill)
+    this.router.post(`${this.path}/create`, cors({ origin: 'http://localhost:3000' }), this.createSkill)
     this.router.get(`${this.path}/get`, this.getSkills)
-    this.router.put(`${this.path}/modify/:_id`, this.modifySkill)
+    this.router.put(`${this.path}/modify/:_id`, cors({ origin: 'http://localhost:3000' }), this.modifySkill)
   }
 
   private createSkill = async (request: Request, response: Response) => {

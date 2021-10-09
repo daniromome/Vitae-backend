@@ -6,6 +6,7 @@ import { handleValidationErrors, handleServerError } from '../common/vitae.utils
 import { ProjectDTO } from './project.dto'
 import { projectController } from './project.controller'
 import { AppRouter } from '../common/interfaces/controller.interface'
+import cors from 'cors'
 
 export class ProjectRouter implements AppRouter {
   public path = '/project';
@@ -17,9 +18,9 @@ export class ProjectRouter implements AppRouter {
   }
 
   private initRoutes () {
-    this.router.post(`${this.path}/create`, this.createProject)
+    this.router.post(`${this.path}/create`, cors({ origin: 'http://localhost:3000' }), this.createProject)
     this.router.get(`${this.path}/get`, this.getProjects)
-    this.router.put(`${this.path}/modify/:_id`, this.modifyProject)
+    this.router.put(`${this.path}/modify/:_id`, cors({ origin: 'http://localhost:3000' }), this.modifyProject)
   }
 
   private createProject = async (request: Request, response: Response) => {
