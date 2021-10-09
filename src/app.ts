@@ -2,7 +2,7 @@ import { json } from 'body-parser'
 import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
-import { AppRouter } from './common/interfaces/controller.interface'
+import { AppRouter } from './common/interfaces/router.interface'
 
 class App {
     public app: express.Application;

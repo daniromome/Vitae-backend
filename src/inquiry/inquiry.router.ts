@@ -4,7 +4,7 @@ import { InquiryDTO } from './inquiry.dto'
 import { validate } from 'class-validator'
 import { handleValidationErrors, handleServerError } from '../common/vitae.utils'
 import { inquiryController } from './inquiry.controller'
-import { AppRouter } from '../common/interfaces/controller.interface'
+import { AppRouter } from '../common/interfaces/router.interface'
 
 export class InquiryRouter implements AppRouter {
   public path = '/inquiry';

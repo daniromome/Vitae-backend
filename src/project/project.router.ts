@@ -5,7 +5,7 @@ import { MongoDTO } from '../common/dtos/mongo.dto'
 import { handleValidationErrors, handleServerError } from '../common/vitae.utils'
 import { ProjectDTO } from './project.dto'
 import { projectController } from './project.controller'
-import { AppRouter } from '../common/interfaces/controller.interface'
+import { AppRouter } from '../common/interfaces/router.interface'
 import cors from 'cors'
 
 export class ProjectRouter implements AppRouter {
