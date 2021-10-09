@@ -2,13 +2,13 @@ import { getModelForClass, prop } from '@typegoose/typegoose'
 
 class Skill {
   @prop()
-  language: string
+  public language!: string
 
   @prop()
-  expertise: number
+  public expertise!: number
 
   @prop()
-  icon: string
+  public icon!: string
 }
 
 export const SkillModel = getModelForClass(Skill)

@@ -2,25 +2,25 @@ import { getModelForClass, prop } from '@typegoose/typegoose'
 
 class Project {
   @prop()
-  image: string
+  public image!: string
 
   @prop()
-  title: string
+  public title!: string
 
   @prop()
-  url: string
+  public url!: string
 
   @prop()
-  summary: string
+  public summary!: string
 
   @prop()
-  description: string
+  public description!: string
 
   @prop()
-  repository?: string
+  public repository?: string
 
   @prop()
-  date: Date
+  public date!: Date
 }
 
 export const ProjectModel = getModelForClass(Project)

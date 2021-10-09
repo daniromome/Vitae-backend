@@ -2,13 +2,13 @@ import { getModelForClass, prop } from '@typegoose/typegoose'
 
 class Inquiry {
   @prop()
-  name: string
+  public name!: string
 
   @prop()
-  email: string
+  public email!: string
 
   @prop()
-  inquiry: string
+  public inquiry!: string
 }
 
 export const InquiryModel = getModelForClass(Inquiry)

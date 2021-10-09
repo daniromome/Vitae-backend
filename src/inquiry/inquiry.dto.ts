@@ -2,11 +2,11 @@ import { IsString, IsEmail } from 'class-validator'
 
 export class InquiryDTO {
     @IsString()
-    public name: string;
+    public name!: string;
 
     @IsEmail()
-    public email: string;
+    public email!: string;
 
     @IsString()
-    public inquiry: string;
+    public inquiry!: string;
 }

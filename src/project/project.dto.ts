@@ -2,23 +2,23 @@ import { IsString, IsUrl, IsDate } from 'class-validator'
 
 export class ProjectDTO {
     @IsString()
-    public image: string;
+    public image!: string;
 
     @IsString()
-    public title: string;
+    public title!: string;
 
     @IsUrl()
-    public url: string;
+    public url!: string;
 
     @IsString()
-    public summary: string;
+    public summary!: string;
 
     @IsString()
-    public description: string;
+    public description!: string;
 
     @IsUrl()
-    public repository: string;
+    public repository!: string;
 
     @IsDate()
-    public date: Date;
+    public date!: Date;
 }
