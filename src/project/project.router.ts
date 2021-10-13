@@ -26,7 +26,7 @@ export class ProjectRouter implements AppRouter {
   private createProject = async (request: Request, response: Response) => {
     try {
       const data = plainToClass(ProjectDTO, request.body)
-      const errors = await validate(data, { validationError: { target: false } })
+      const errors = await validate(data, { validationError: { target: false }, forbidUnknownValues: true })
       if (errors.length > 0) return response.status(400).json(handleValidationErrors(errors))
       const p = await projectController.createProject(data)
       const message = `${p.title} has been registered as a project within your portfolio`
@@ -49,8 +49,8 @@ export class ProjectRouter implements AppRouter {
       const params = plainToClass(MongoDTO, request.params)
       const data = plainToClass(ProjectDTO, request.body)
       const errors = [
-        await validate(params, { validationError: { target: false } }),
-        await validate(data, { validationError: { target: false } })
+        await validate(params, { validationError: { target: false }, forbidUnknownValues: true }),
+        await validate(data, { validationError: { target: false }, forbidUnknownValues: true })
       ]
       errors.forEach(e => { if (e.length > 0) return response.status(400).json(handleValidationErrors(e)) })
       const p = await projectController.modifyProject(params._id, data)

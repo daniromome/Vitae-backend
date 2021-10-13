@@ -25,7 +25,7 @@ export class SkillRouter {
   private createSkill = async (request: Request, response: Response) => {
     try {
       const data = plainToClass(SkillDTO, request.body)
-      const errors = await validate(data, { validationError: { target: false } })
+      const errors = await validate(data, { validationError: { target: false }, forbidUnknownValues: true })
       if (errors.length > 0) return response.status(400).json(handleValidationErrors(errors))
       const s = await skillController.createSkill(data)
       const message = `${s.language} has been registered as a skill with an expertise level of ${s.expertise}/5`
@@ -48,8 +48,8 @@ export class SkillRouter {
       const params = plainToClass(MongoDTO, request.params)
       const data = plainToClass(SkillDTO, request.body)
       const errors = [
-        await validate(params, { validationError: { target: false } }),
-        await validate(data, { validationError: { target: false } })
+        await validate(params, { validationError: { target: false }, forbidUnknownValues: true }),
+        await validate(data, { validationError: { target: false }, forbidUnknownValues: true })
       ]
       errors.forEach(e => { if (e.length > 0) return response.status(400).json(handleValidationErrors(e)) })
       await skillController.modifySkill(params._id, data)

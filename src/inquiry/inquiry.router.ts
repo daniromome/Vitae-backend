@@ -21,7 +21,7 @@ export class InquiryRouter implements AppRouter {
   private submitInquiry = async (request: Request, response: Response) => {
     try {
       const data = plainToClass(InquiryDTO, request.body)
-      const errors = await validate(data, { validationError: { target: false } })
+      const errors = await validate(data, { validationError: { target: false }, forbidUnknownValues: true })
       if (errors.length > 0) return response.status(400).json(handleValidationErrors(errors))
       const i = await inquiryController.submitInquiry(data)
       const message = `${i.name} just sent an inquiry! 📝`
